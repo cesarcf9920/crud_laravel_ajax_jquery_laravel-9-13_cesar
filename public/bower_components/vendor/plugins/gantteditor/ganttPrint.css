@@ -1,0 +1,136 @@
+  
+#header { position: fixed; left: 0px; top: 0; right: 0px; height: 130px; text-align: center; display:block !important;}
+#footer { position: fixed; left: 0px; bottom: 0; right: 0px; height: 70px; display:block !important;}
+#footer .page:after { content: counter(page, number); }
+
+body
+{
+    margin: 80px 0px 120px 0px !important;    
+}
+.header_print img, div.footer_print img{
+    width: 100%;
+}
+.noprint {
+  display:none !important;
+}
+
+BODY, TBODY {
+  font-family: arial;
+  font-size: 12px;
+  margin: 0;
+  color: #000;
+  overflow: visible!important;
+}
+
+.teamworkIcon, .edit-task, .execute-task{
+  display:none;
+}
+
+.mainColumn{
+  width:98% !important;
+}
+
+
+#TWGanttArea{
+  overflow-x: visible !important;
+  overflow-y: visible !important;
+  width: auto !important;
+  height: auto !important;
+  border:none !important;
+}
+
+.splitterContainer{
+  width: auto !important;
+  height: auto !important;
+}
+.splitElement{
+  position: relative !important;
+
+  height: auto !important;
+  top:0 !important;
+  left: 0 !important;
+  overflow-x: hidden !important;
+  overflow-y: hidden !important;
+}
+.gdfTable{
+    table-layout: auto!important;
+}
+
+.splitElement.splitBox1, .splitElement.splitBox2{
+    width:50% !important;
+    float:left;
+    position:relative;
+}
+
+.emptyRow, .hidden-print{
+  display: none !important;
+}
+.vSplitBar{
+        clear: both;
+}
+.gdfTable{
+   width: 0 !important;
+ }
+ 
+ body .splitBox1,body .splitBox2{
+  width:50% !important;
+}
+
+.splitBox2{
+  page-break-before: unset !important;
+}
+
+.splitBox2 .gantt{
+    display: inline-block;
+}
+
+.ganttFixHead{
+  display: none !important;
+}
+.gdfTable{
+    top:0;
+    position:relative;
+}
+
+/*Modificado para el ZAPCOD*/
+body #sidebar_left,body header.navbar,body .container-button-pdf{
+   display:none!important;  
+}
+
+body header#topbar{
+    margin-left: 0 !important; 
+}
+body #topbar.affix{
+    top:0;
+    position:absolute;
+}
+body #topbar.affix + #content{
+    margin-top: 10px !important; 
+}
+body #content_wrapper{
+    margin-left: 0 !important;
+}
+
+.vSplitBar{
+    position: inherit !important;
+    width: 0px !important;
+}
+.vSplitBar>div{
+    display:none;
+}
+.tray.tray-center{
+    height: auto !important;
+}
+#topbar .topbar-left{
+    display: none !important;
+}
+#topbar .topbar-right{
+    float: left;
+}
+
+.gdfTable td, .gdfTable th{
+    font-size: 12px !important;
+}
+.taskEditRow input, .columnWidthTest{
+    font-size: 10px !important;
+}
