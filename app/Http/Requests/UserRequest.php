@@ -2,10 +2,11 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Foundation\Http\FormRequest;
 use App\Http\Requests\Request;
 use Illuminate\Validation\Rule;
 
-class UserRequest extends Request
+class UserRequest extends FormRequest
 {
     public function authorize()
     {
@@ -15,8 +16,9 @@ class UserRequest extends Request
     {
         return   [ 
                 'name' => 'required',
-                'email' => 'required',
                 'phone' => 'required',
+                'email' => 'nullable|email',
+                'compañia' => 'required',
                 'street' => 'required',
                 'lat' => 'required',
                 'lng' => 'required',
@@ -27,8 +29,9 @@ class UserRequest extends Request
     {
         return [
             'name.required' => 'Debe de ingresar en nombre',
-            'email.required' => 'Debe ingresar el email',
             'phone.required'  => 'Debe ingresar el número telefónico',
+            'email.email' => 'Debe de ingresar un correo eletrónico válido',
+            'compañia' => 'Debe ingresar la compañia',
             'street.required'  => 'Debe ingresar la calle',
             'lat.required'  => 'Debe ingresar la latitud',
             'lng.required'  => 'Debe ingresar la longitud',

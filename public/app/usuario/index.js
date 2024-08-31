@@ -1,5 +1,12 @@
 $(document).on('ready', function(){
       
+    $(document).on('click', '.pagination li a', function(e){
+        e.preventDefault();
+        
+        var url = $(this).attr('href');
+        load(url);
+    });
+
    ModalCRUD.create({
         title: entity_title,
         element: '#btn-create',
@@ -48,7 +55,7 @@ $(document).on('ready', function(){
     ModalCRUD.edit({
         title: entity_title,
         element: '.btn-edit',
-        form_element: '#form-update',
+        form_element: '#form-edit',
         url: function(elemt){
             return $(elemt).attr('href');
         },
@@ -126,8 +133,9 @@ var customize_rules = {
 var rules = $.extend( true, {}, customize_rules );
 rules.rules = {
         name: {required: true},
-        email: {required: true},
         phone: {required: true},
+        email: {required: true},
+        compañia: {required: true},
         street: {required: true},
         lat: {required: true},
         lng: {required: true}
@@ -144,5 +152,5 @@ var load = function(url = null){
     
 var init_fuctions = function()
 {        
-    $(".select2.select2-container").removeAttr("style");
+    //$(".select2.select2-container").removeAttr("style");
 }

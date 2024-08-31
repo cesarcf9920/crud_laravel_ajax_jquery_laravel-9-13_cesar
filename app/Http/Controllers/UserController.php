@@ -64,10 +64,7 @@ class UserController extends Controller
             abort(500);
         }
 
-        $post_route = route('usuario.index');
-        session()->flash('message', 'El usuario se guardó satisfactoriamente.');
-
-        return response()->json(['route' => $post_route]);
+        return response()->json(true);
     }
 
     public function edit(Usuario $usuario)
@@ -75,19 +72,18 @@ class UserController extends Controller
         return view('usuario.modals.edit', compact('usuario'));
     }
 
-    public function update(UsuarioRequest $request, Usuario $usuario)
+    public function update(UserRequest $request, Usuario $usuario)
     {
+        DB::beginTransaction();
         try {
-            DB::beginTransaction();
-            $usuario->update($request->all());
-
+            $usuario->update($request->all());  
             DB::commit();
         } catch (Exception $e) {
             DB::rollBack();
             abort(500);
         }
 
-        return redirect()->route('usuario.edit', ['usuario' => $usuario->id])->with('message', "El usuario: $usuario->nombre se actualizó satisfactoriamente");
+        return response()->json(true);
     }
 
     public function show(Usuario $usuario)

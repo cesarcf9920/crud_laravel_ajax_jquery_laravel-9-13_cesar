@@ -9,64 +9,22 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+    <!-- Admin Forms CSS -->
+    <link rel="stylesheet" type="text/css"
+          href="{{ asset('bower_components/assets/admin-tools/admin-forms/css/admin-forms.min.css') }}">
+
     <!-- Theme CSS -->
     <link rel="stylesheet" type="text/css" href="{{ asset('bower_components/assets/skin/default_skin/css/theme.css') }}">
 
-    <style>
+    <!-- JsTree CSS -->
+    <!--<link rel="stylesheet" href="{{asset('bower_components/vendor/plugins/jstree/themes/default/style.min.css')}}"/>-->
 
-        /* Modal */
-        .modal-lg .modal-body {
-            max-height: 485px;
-            overflow-y: auto;
-        }
-
-        .content-file {
-            opacity: 0.1;
-        }
-
-        .title-file {
-            color: #999;
-        }
-
-
-        .admin-form .container-switch .switch-primary > input:checked + label {
-            background: green !important;
-            border: 2px solid green !important;
-        }
-
-        .admin-form .container-switch .switch > label {
-            width: 120px !important;
-            background: red !important;
-            border: 2px solid red !important;
-        }
-
-        .admin-form .container-switch .switch > input:checked + label:after {
-            float: right;
-        }
-
-        .admin-form .container-switch .switch > label:before {
-            right: 45px;
-        }
-
-        .admin-form .container-switch .switch > input:checked + label:before {
-            left: 5px;
-        }
-
-        .lb-nav {
-            cursor: help;
-        }
-
-        .state-error {
-            color: red;
-        }
-    </style>
+    <!-- General CSS -->
+    <link href="{{ asset('app/css/styles.css')}}" rel="stylesheet" type="text/css"/>
 
 </head>
 
-
 <body class="dashboard-page onload-check" style="min-height: 1230px; overflow-x: initial;">
-
-
 
 <!-- Start: Main -->
 <div id="main">
@@ -137,33 +95,21 @@
 <!-- End: Main -->
 <div class="modal-background"></div>
 
-
-<!-- SCRIPTS Libs -->
-
 <!-- JQuery -->
 <script type="text/javascript" src="{{ asset('bower_components/vendor/jquery/jquery-1.11.1.min.js') }}"></script>
 <script type="text/javascript" src="{{ asset('bower_components/vendor/jquery/jquery_ui/jquery-ui.min.js') }}"></script>
 
+<!--Config plugins JS-->
+<script type="text/javascript" src="{{ asset('js/config.js') }}"></script>
+
 <!--Theme Javascript-->
 <script type="text/javascript" src="{{ asset('bower_components/assets/js/utility/utility.js') }}"></script>
-<script type="text/javascript" src="{{ asset('bower_components/assets/js/main.js') }}"></script>
-
 <script type="text/javascript" src="{{ asset('js/functions.js') }}"></script>
-
-<script src="{{ asset('app/general/css/functions.js')}}" type="text/javascript"></script>
 
 <!-- Scripts in views -->
 @stack('scripts')
 
-
 <!-- BEGIN: PAGE SCRIPTS -->
-<script type="text/javascript">
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jsrsasign/10.5.13/jsrsasign-all-min.js"
-        integrity="sha512-VMSfvYqueByPkGKgs04eYawSpoaEI8FZWl1urgDS405q27u+r34Zx0rRsZyS9q3keOPvUREwQsMXitQ5qkvucA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-
-
 <script type="text/javascript">
    
     $(document).ready(function () {
@@ -201,7 +147,7 @@
                 403: function (data) {
                     var message = data.responseJSON == '' ? 'No tiene permitido realizar esta acción o ver parte de este conteanido.' : data.responseJSON;
                     AlertMessage.printError('.side-body:last', message);
-                    var top = 0;// $(".side-body:last").offset().top;
+                    var top = 0;
                     $("[type=submit]").removeAttr("disabled");
 
                     if ($(".bootbox").length) {
@@ -213,12 +159,12 @@
                 }
             }
         });
+
         $.ajaxSetup({
             statusCode: {
                 404: function (data) {
-//                        AlertMessage.print('.side-body:last', data.responseText);
                     AlertMessage.printInfo('.side-body:last', 'No se encontraron resultados.');
-                    var top = 0;// $(".side-body:last").offset().top;
+                    var top = 0;
                     $("[type=submit]").removeAttr("disabled");
 
                     if ($(".bootbox").length) {
@@ -229,11 +175,12 @@
                 }
             }
         });
+
         $.ajaxSetup({
             statusCode: {
                 422: function (data) {
                     AlertMessage.printError('.side-body:last', data.responseJSON.errors);
-                    var top = 0;// $(".side-body:last").offset().top;
+                    var top = 0;
                     $("[type=submit]").removeAttr("disabled");
 
                     if ($(".bootbox").length) {
@@ -244,11 +191,12 @@
                 }
             }
         });
+        
         $.ajaxSetup({
             statusCode: {
                 500: function (data) {
                     AlertMessage.print('.side-body:last', data.responseText);
-                    var top = 0;// $(".side-body:last").offset().top;
+                    var top = 0;
                     $("[type=submit]").removeAttr("disabled");
 
                     if ($(".bootbox").length) {
@@ -258,27 +206,13 @@
                     }
                 }
             }
-    });
+        });
+
     });
 </script>
 <!-- END: PAGE SCRIPTS -->
 
-
 </body>
 <input type="hidden" value="0" id="valid_ajax_request"/>
 
-<style>
-    .support-chat-icon[data-v-2eae6cb2] {
-        background-color: rgb(244 123 34);
-    }
-
-    .top-header {
-        background-color: rgb(244 123 34) !important;
-    }
-
-    .new-conversation {
-        background-color: rgb(244 123 34) !important;
-    }
-
-</style>
 </html>
