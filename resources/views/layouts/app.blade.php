@@ -1,218 +1,128 @@
 <!DOCTYPE html>
 <html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Sistema</title>
 
-<head>   
-
-    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <!-- Admin Forms CSS -->
-    <link rel="stylesheet" type="text/css"
-          href="{{ asset('bower_components/assets/admin-tools/admin-forms/css/admin-forms.min.css') }}">
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 
-    <!-- Theme CSS -->
-    <link rel="stylesheet" type="text/css" href="{{ asset('bower_components/assets/skin/default_skin/css/theme.css') }}">
-
-    <!-- JsTree CSS -->
-    <!--<link rel="stylesheet" href="{{asset('bower_components/vendor/plugins/jstree/themes/default/style.min.css')}}"/>-->
-
-    <!-- General CSS -->
-    <link href="{{ asset('app/css/styles.css')}}" rel="stylesheet" type="text/css"/>
-
+    <style>
+        body { overflow-x: hidden; }
+        .sidebar { width: 250px; height: 100vh; position: fixed; }
+        .content { margin-left: 250px; }
+    </style>
 </head>
 
-<body class="dashboard-page onload-check" style="min-height: 1230px; overflow-x: initial;">
+<body>
 
-<!-- Start: Main -->
-<div id="main">
-   
-    <!-- Start: Header -->
-    <header class="navbar navbar-fixed-top navbar-shadow" style="border-top: 5px solid rgb(244, 123, 34); height: 65px">
-        <!--bg-hitachi-->
-        <div class="navbar-branding dark">
+<div class="d-flex">
 
-            <a class="navbar-brand" href="{{ route('usuario.index') }}" style="padding-left: 0px;">
-               
-            </a>
-            <a class="navbar-brand" href="#" style="font-size: 11px; margin-top: 14px; padding-left: 0;">
-                
-            </a>
-            <span id="toggle_sidemenu_l" class="ad ad-lines"></span>
-        </div>
-        @include('layouts.navs.nav-left')
-    </header>
-    <!-- End: Header -->
+    <!-- SIDEBAR -->
+    <div class="sidebar bg-dark text-white p-3">
+        <h5 class="text-center">Sistema</h5>
+        <hr>
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a href="{{ route('trabajador.index') }}" class="nav-link text-white">
+                    <i class="bi bi-people"></i> Trabajadores
+                </a>
+            </li>
+        </ul>
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a href="{{ route('cargo.index') }}" class="nav-link text-white">
+                    <i class="bi bi-people"></i> Cargos
+                </a>
+            </li>
+        </ul>
+        <ul class="nav flex-column">
+            <li class="nav-item">
+                <a href="{{ route('proyecto.index') }}" class="nav-link text-white">
+                    <i class="bi bi-people"></i> Proyectos
+                </a>
+            </li>
+        </ul>
+    </div>
 
-    <!-- Start: Sidebar Left -->
-    <aside id="sidebar_left" class="nano nano-light affix has-scrollbar sidebar-light light">
-        <!-- Start: Sidebar Left Content -->
-        <div class="sidebar-left-content nano-content" tabindex="0">
-            <div class="nav-collapse">
-                @include('layouts.sidebars.sidebar')
+    <!-- CONTENT -->
+    <div class="content w-100">
+
+        <!-- TOPBAR -->
+        <nav class="navbar bg-light shadow-sm px-3">
+            <div class="container-fluid">
+                <div>@yield('breadcrumb')</div>
+                <div>@yield('topbar')</div>
             </div>
-        </div>
-        <!-- End: Sidebar Left Content -->
+        </nav>
 
-        <div class="nano-panel">
-            <div class="nano-slider" style="height: 336px; transform: translate(0px, 0px);">
-            </div>
-        </div>
-    </aside>
-    <!-- End: Sidebar Left -->
-
-    <!-- Start: Content-Wrapper -->
-    <section id="content_wrapper">
-        
-        <!-- Start: Topbar -->
-        <header id="topbar" class="alt">
-            <div class="topbar-left">
-                @yield('breadcrumb')
-            </div>
-            <div class="topbar-right">
-                @yield('topbar')
-            </div>
-        </header>
-        <!-- End: Topbar -->
-
-        <!-- Begin: Content -->
-        <section id="content" class="">            
-            @yield('content-errors')
-            <div class='side-body'></div>
-            @include('layouts.messages.message')
+        <!-- MAIN -->
+        <div class="p-4">
             @yield('content')
-        </section>
-        <!-- End: Content -->
+        </div>
 
-    </section>
-    <!-- End: Content-Wrapper -->
+    </div>
 
-    <!-- Start: Theme Preview Panel -->
-    <!-- End: Theme Preview Panel -->
 </div>
-<!-- End: Main -->
-<div class="modal-background"></div>
 
-<!-- JQuery -->
-<script type="text/javascript" src="{{ asset('bower_components/vendor/jquery/jquery-1.11.1.min.js') }}"></script>
-<script type="text/javascript" src="{{ asset('bower_components/vendor/jquery/jquery_ui/jquery-ui.min.js') }}"></script>
+<!-- jQuery PRIMERO -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
-<!--Config plugins JS-->
-<script type="text/javascript" src="{{ asset('js/config.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
-<!--Theme Javascript-->
-<script type="text/javascript" src="{{ asset('bower_components/assets/js/utility/utility.js') }}"></script>
-<script type="text/javascript" src="{{ asset('js/functions.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
+<!-- Bootstrap -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 
-<!-- Scripts in views -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<!-- Select2 CSS -->
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<!-- Select2 JS -->
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+<!--<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>-->
+
 @stack('scripts')
 
-<!-- BEGIN: PAGE SCRIPTS -->
 <script type="text/javascript">
-   
-    $(document).ready(function () {
-        "use strict";
-        
-        $.ajaxSetup({
-            statusCode: {
-                200: function () {
-                    //                      var top = 0;// $(".side-body:last").offset().top;
-                    //                       $("[type=submit]").removeAttr("disabled");
-                    //                       $("body").scrollTop(top);
-//                        AlertMessage.removeCurrentAlerts();
-                }
+    /*$.ajaxSetup({
+        statusCode: {
+            422: function (xhr) {
+                showFieldErrors(xhr.responseJSON.errors);
             }
+        }
+    });*/
+
+    function showFieldErrors(errors) {
+
+        $('.error-text').remove();
+        $('input, select').removeClass('is-invalid');
+
+        $.each(errors, function(field, messages) {
+
+            let input = $('[name="' + field + '"]');
+
+            input.addClass('is-invalid');
+
+            input.after(
+                '<small class="text-danger error-text">' + messages[0] + '</small>'
+            );
         });
+    }
 
-        $.ajaxSetup({
-            statusCode: {
-                401: function () {
-                    AlertMessage.printError('.side-body:last', 'No tiene permitido realizar esta acción o ver parte de este contenido.');
-                    var top = 0;// $(".side-body:last").offset().top;
-                    $("[type=submit]").removeAttr("disabled");
-
-                    if ($(".bootbox").length) {
-                        $(".modal-body").animate({scrollTop: 0}, "fast");
-                    } else {
-                        $(document).scrollTop(top);
-                    }
-                }
-            }
-        });
-
-        $.ajaxSetup({
-            statusCode: {
-                403: function (data) {
-                    var message = data.responseJSON == '' ? 'No tiene permitido realizar esta acción o ver parte de este conteanido.' : data.responseJSON;
-                    AlertMessage.printError('.side-body:last', message);
-                    var top = 0;
-                    $("[type=submit]").removeAttr("disabled");
-
-                    if ($(".bootbox").length) {
-                        $(".modal-body").animate({scrollTop: 0}, "fast");
-                    } else {
-                        $(document).scrollTop(top);
-                    }
-
-                }
-            }
-        });
-
-        $.ajaxSetup({
-            statusCode: {
-                404: function (data) {
-                    AlertMessage.printInfo('.side-body:last', 'No se encontraron resultados.');
-                    var top = 0;
-                    $("[type=submit]").removeAttr("disabled");
-
-                    if ($(".bootbox").length) {
-                        $(".modal-body").animate({scrollTop: 0}, "fast");
-                    } else {
-                        $(document).scrollTop(top);
-                    }
-                }
-            }
-        });
-
-        $.ajaxSetup({
-            statusCode: {
-                422: function (data) {
-                    AlertMessage.printError('.side-body:last', data.responseJSON.errors);
-                    var top = 0;
-                    $("[type=submit]").removeAttr("disabled");
-
-                    if ($(".bootbox").length) {
-                        $(".modal-body").animate({scrollTop: 0}, "fast");
-                    } else {
-                        $(document).scrollTop(top);
-                    }
-                }
-            }
-        });
-        
-        $.ajaxSetup({
-            statusCode: {
-                500: function (data) {
-                    AlertMessage.print('.side-body:last', data.responseText);
-                    var top = 0;
-                    $("[type=submit]").removeAttr("disabled");
-
-                    if ($(".bootbox").length) {
-                        $(".modal-body").animate({scrollTop: 0}, "fast");
-                    } else {
-                        $(document).scrollTop(top);
-                    }
-                }
-            }
-        });
-
-    });
+    axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
+    axios.defaults.headers.common['X-CSRF-TOKEN'] =
+        document.querySelector('meta[name="csrf-token"]').content;
+    
 </script>
-<!-- END: PAGE SCRIPTS -->
 
 </body>
-<input type="hidden" value="0" id="valid_ajax_request"/>
-
 </html>

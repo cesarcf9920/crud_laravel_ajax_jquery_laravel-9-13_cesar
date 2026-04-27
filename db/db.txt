@@ -1,0 +1,67 @@
+-- Base de datos
+CREATE DATABASE IF NOT EXISTS db_crud2
+CHARACTER SET utf8mb4
+COLLATE utf8mb4_unicode_ci;
+
+USE db_crud2;
+
+-- =========================
+-- TABLA CARGOS
+-- =========================
+CREATE TABLE cargos (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(255) NOT NULL,
+    
+    created_at TIMESTAMP NULL,
+    updated_at TIMESTAMP NULL,
+    deleted_at TIMESTAMP NULL,
+
+    created_by INT UNSIGNED NULL,
+    updated_by INT UNSIGNED NULL,
+    deleted_by INT UNSIGNED NULL
+) ENGINE=INNODB;
+
+-- =========================
+-- TABLA PROYECTOS
+-- =========================
+CREATE TABLE proyectos (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(255) NOT NULL,
+    
+    created_at TIMESTAMP NULL,
+    updated_at TIMESTAMP NULL,
+    deleted_at TIMESTAMP NULL,
+
+    created_by INT UNSIGNED NULL,
+    updated_by INT UNSIGNED NULL,
+    deleted_by INT UNSIGNED NULL
+) ENGINE=INNODB;
+
+-- =========================
+-- TABLA TRABAJADORES
+-- =========================db_crud2
+CREATE TABLE trabajadores (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    nombre VARCHAR(255) NOT NULL,
+    cargo_id INT UNSIGNED NOT NULL,
+    proyecto_id INT UNSIGNED NOT NULL,
+    activo TINYINT(1) DEFAULT 1,
+
+    created_at TIMESTAMP NULL,
+    updated_at TIMESTAMP NULL,
+    deleted_at TIMESTAMP NULL,
+
+    created_by INT UNSIGNED NULL,
+    updated_by INT UNSIGNED NULL,
+    deleted_by INT UNSIGNED NULL,
+
+    INDEX idx_cargo (cargo_id),
+    INDEX idx_proyecto (proyecto_id),
+    INDEX idx_deleted_at (deleted_at),
+
+    CONSTRAINT fk_trabajador_cargo 
+        FOREIGN KEY (cargo_id) REFERENCES cargos(id),
+
+    CONSTRAINT fk_trabajador_proyecto 
+        FOREIGN KEY (proyecto_id) REFERENCES proyectos(id)
+) ENGINE=INNODB;
